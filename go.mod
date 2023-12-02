@@ -1,6 +1,6 @@
 module github.com/bcshelto565/CSCE-4600-A2
 
-go 1.21.1
+go 1.23
 
 require (
 	github.com/jh125486/CSCE4600 v0.0.0-20230815011650-54991d2ad9a9
