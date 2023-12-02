@@ -5,6 +5,11 @@ import (
 	"io"
 	"os"
 	"strings"
+	"errors"
+)
+
+var (
+	ErrInvalidArgCount = errors.New("invalid argument count")
 )
 
 func EnvironmentVariables(w io.Writer, args ...string) error {

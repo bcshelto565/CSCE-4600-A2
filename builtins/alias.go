@@ -3,13 +3,12 @@ package builtins
 import (
 	"errors"
 	"fmt"
-	"os"
-	"strings"
+	"io"
 )
 
 var (
-	ErrInvalidArgCount = errors.New("invalid argument count")
-	HomeDir, _         = os.UserHomeDir()
+	ErrInvalidArgCountAlias = errors.New("invalid argument count")
+	NonError = errors.New("")
 )
 
 type ComAlias struct {			// struct for new custom alias entries
@@ -17,29 +16,33 @@ type ComAlias struct {			// struct for new custom alias entries
 	value string
 }
 
-aliasSlic := []ComAlias{		// slice for holding all the custom alias entries
-}
+var aliasSlic []ComAlias		// slice for holding all the custom alias entries
 
 func printComs(aliasSlic []ComAlias) {		// simple for loop function to print entries
 	for _, ComAlias := range aliasSlic {
-		fmt.Fprintln("Alias name: %s, Alias value: %s", ComAlias.name, ComAlias.value)
+		fmt.Print("Alias name: %s, Alias value: %s", ComAlias.name, ComAlias.value)
 	}
+	return
 }
 
-func CommandAlias(args ...string) error {
+func CommandAlias(w io.Writer, args ...string) error {
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
-		return fmt.Errorf("%w: expected at least one argument, one for print or write of a name, and one for value of alias", ErrInvalidArgCount)
+		return fmt.Errorf("%w: expected at least one argument, one for print or write of a name, and one for value of alias", ErrInvalidArgCountAlias)
 	case 1:
 		if args[0] == "-p" {
-			printComs(ComAlias struct)
+			printComs(aliasSlic)
+			return fmt.Errorf("%w", NonError)
+		} else {
+			return fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
 		}
 	case 2:
-		return fmt.Errorf("%w: missing arguments, alias needs to be used in the following syntax: alias update = \"sudo apt-get update\" ensure the \"\" quotes are used to define the command", ErrInvalidArgCount)
+		return fmt.Errorf("%w: missing arguments, alias needs to be used in the following syntax: alias update = \"sudo apt-get update\" ensure the \"\" quotes are used to define the command", ErrInvalidArgCountAlias)
 	case 3:
-		aliasSlic = append(aliasSlic, ComAlias{name: arg[0], value: arg[2]})
-		fmt.Println("new alias is: ", arg[0], " = ", arg[2])
+		aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
+		fmt.Println("new alias is: ", args[0], " = ", args[2])
+		return fmt.Errorf("%w", NonError)
 	default:
-		return fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCount)
+		return fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
 	}
 }

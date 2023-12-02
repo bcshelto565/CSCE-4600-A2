@@ -5,42 +5,42 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"io"
 )
 
 var (
-	ErrInvalidArgCount = errors.New("invalid argument count")
-	HomeDir, _         = os.UserHomeDir()
+	ErrInvalidArgCountHelp = errors.New("invalid argument count")
 )
 
-HelpList = []string {
-}
+var HelpList []string
 
-func Help(args ...string) error {
+func Help(w io.Writer, args ...string) error {
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
-		dir, err := os.Open(".")
+		dir, err := os.Open("./builtins")
 		if err != nil {
 			fmt.Println("Error:", err)
-			return
+			return fmt.Errorf("%w: Directory failed to open", EmptyFileError)
 		}
 		defer dir.Close()
 		files, err := dir.Readdir(-1)
 		if err != nil {
 			fmt.Println("Error:", err)
-			return
+			return fmt.Errorf("%w: Directory failed to open", EmptyFileError)
 		}
 		for _, file := range files {
-			if strings.contains(file, "test"){
+			if strings.Contains((file.Name()), "test"){
 				continue
-			}
-			else {
-				fileNam := file[:len(file)-3]
+			} else {
+				fileNam := ((file.Name())[:len(file.Name())-3])
 				HelpList = append(HelpList, fileNam)
 			}
 		}
-		for i, s := range HelpList {
+		for _, s := range HelpList {
 			fmt.Println(s)
 		}
+		return fmt.Errorf("%w", NonError)
+	default:
+		return fmt.Errorf("%w: expected no arguments for help. help prints out available builtin commands", ErrInvalidArgCountHelp)
 	}
-
 }
