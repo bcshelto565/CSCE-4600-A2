@@ -10,7 +10,7 @@ import (
 	"os/user"
 	"strings"
 
-	"github.com/jh125486/CSCE4600/Project2/builtins"
+	"github.com/bcshelto565/CSCE-4600-A2/builtins"
 )
 
 func main() {
@@ -85,8 +85,8 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.Echo(w, args...)
 	case "help":
 		return builtins.Help(w, args...)
-	case "type":
-		return builtins.Type(w, args...)
+	case "cat":
+		return builtins.PrintFileContents(w, args...)
 	case "pwd":
 		return builtins.PrintCurrentDir(w, args...)
 	case "exit":
