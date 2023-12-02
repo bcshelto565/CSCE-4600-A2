@@ -9,7 +9,7 @@ func TestHelpNoArgs(t *testing.T) {
 	var buf bytes.Buffer
 	err := Help(&buf)
 	if err != nil {
-		t.Errorf("Expected no error, got %w", err)
+		t.Error("Expected no error, got %w", err)
 	}
 	expectedOutput := "cd\ncat\npwd\nalias\nhelp\nenv\necho\n"
 	if got := buf.String(); got != expectedOutput {
@@ -21,7 +21,7 @@ func TestHelpWithArgs(t *testing.T) {
 	var buf bytes.Buffer
 	err := Help(&buf, "arg1", "arg2")
 	if err == nil {
-		t.Errorf("Expected error of too many arguments, got nil")
+		t.Error("Expected error of too many arguments, got nil")
 	}
 	expectedError := ErrInvalidArgCountHelp
 	if err != expectedError {
