@@ -20,7 +20,7 @@ var aliasSlic []ComAlias		// slice for holding all the custom alias entries
 
 func printComs(aliasSlic []ComAlias) {		// simple for loop function to print entries
 	for _, ComAlias := range aliasSlic {
-		fmt.Print("Alias name: %s, Alias value: %s", ComAlias.name, ComAlias.value)
+		fmt.Printf("Alias name: %s, Alias value: %s", ComAlias.name, ComAlias.value)
 	}
 	return
 }
