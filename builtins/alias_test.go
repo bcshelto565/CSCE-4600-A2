@@ -1,81 +1,38 @@
-package builtins_test
+package builtins
 
 import (
-	"errors"
-	"github.com/bcshelto565/CSCE-4600-A2/builtins"
-	"os"
+	"bytes"
 	"testing"
 )
 
-func TestCommandAlias(t *testing.T) {
-	tmp := t.TempDir()
-
-	type args struct {
-		args []string
+func TestCommandAliasPrintAliases(t *testing.T) {
+	var buf bytes.Buffer
+	err := CommandAlias(&buf, "-p")
+	if err != NonError {
+		t.Errorf("Expected no error, got %v", err)
 	}
-	tests := []struct {
-		name         string
-		args         args
-		wantList     bool
-
-		wantErr      error
-	}{
-		{
-			name: "error too many args",
-			args: args{
-				args: []string{"abc", "def", "ghi", "jkl"},
-			},
-			wantErr: builtins.ErrInvalidArgCountAlias,
-		},
-		{
-			name:    "no args should throw error",
-			wantErr: builtins.ErrInvalidArgCountAlias,		
-		},
-		{
-			name: "one arg should print aliases if arg is -p",
-			args: args{
-				args: []string{"-p"},
-			},
-			wantList: true
-		},
+	expectedOutput := ""
+	if got := buf.String(); got != expectedOutput {
+		t.Errorf("Expected output %q, got %q", expectedOutput, got)
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			// setup
-			if tt.unsetHomedir {
-				oldVal := builtins.HomeDir
-				t.Cleanup(func() {
-					builtins.HomeDir = oldVal
-				})
-				builtins.HomeDir = ""
-			}
+}
 
-			// testing
-			if err := builtins.CommandAlias(tt.args.args...); tt.wantErr != nil {
-				if !errors.Is(err, tt.wantErr) {
-					t.Fatalf("ChangeDirectory() error = %v, wantErr %v", err, tt.wantErr)
-				}
-				return
-			} else if err != nil {
-				t.Fatalf("ChangeDirectory() unexpected error: %v", err)
-			}
+func TestCommandAliasAddAlias(t *testing.T) {
+	var buf bytes.Buffer
+	err := CommandAlias(&buf, "newAlias", "=", "echo \"Hello, World!\"")
+	if err != NonError {
+		t.Errorf("Expected no error, got %v", err)
+	}
+	expectedOutput := "new alias is: newAlias = echo \"Hello, World!\""
+	if got := buf.String(); got != expectedOutput {
+		t.Errorf("Expected output %q, got %q", expectedOutput, got)
+	}
+}
 
-			// "happy" path
-			wd, err := os.Getwd()
-			if err != nil {
-				t.Fatalf("Could not get working dir")
-			}
-			d1, err := os.Stat(wd)
-			if err != nil {
-				t.Fatalf("Could not stat dir: %v", wd)
-			}
-			d2, err := os.Stat(tt.wantDir)
-			if err != nil {
-				t.Fatalf("Could not stat dir: %v", tt.wantDir)
-			}
-			if !os.SameFile(d1, d2) {
-				t.Errorf("Working Directory = %v, wantDir %v", wd, tt.wantDir)
-			}
-		})
+func TestCommandAliasInvalidArgs(t *testing.T) {
+	var buf bytes.Buffer
+	err := CommandAlias(&buf)
+	if err != ErrInvalidArgCountAlias {
+		t.Errorf("Expected error %v, got %v", ErrInvalidArgCountAlias, err)
 	}
 }
