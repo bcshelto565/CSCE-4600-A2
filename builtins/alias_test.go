@@ -8,7 +8,7 @@ import (
 func TestCommandAliasPrintAliases(t *testing.T) {
 	var buf bytes.Buffer
 	err := CommandAlias(&buf, "-p")
-	if err != NonError {
+	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
 	expectedOutput := ""
@@ -20,7 +20,7 @@ func TestCommandAliasPrintAliases(t *testing.T) {
 func TestCommandAliasAddAlias(t *testing.T) {
 	var buf bytes.Buffer
 	err := CommandAlias(&buf, "newAlias", "=", "echo \"Hello, World!\"")
-	if err != NonError {
+	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
 	expectedOutput := "new alias is: newAlias = echo \"Hello, World!\""
