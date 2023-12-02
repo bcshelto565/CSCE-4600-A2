@@ -21,7 +21,7 @@ func TestHelpWithArgs(t *testing.T) {
 	var buf bytes.Buffer
 	err := Help(&buf, "arg1", "arg2")
 	if err == nil {
-		t.Error("Expected error of too many arguments, got nil")
+		t.Errorf("Expected error of too many arguments, got nil")
 	}
 	expectedError := ErrInvalidArgCountHelp
 	if err != expectedError {
