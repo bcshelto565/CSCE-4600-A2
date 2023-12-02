@@ -1,2 +1,2 @@
 - name: Run golangci-lint
-    uses: golangci/golangci-lint-action@v3.7.0
+  uses: golangci/golangci-lint-action@v3.7.0
