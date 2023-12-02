@@ -7,7 +7,7 @@ import (
 
 func TestEchoWithArgs(t *testing.T) {
 	var buf bytes.Buffer
-	err := Echo(&buf, "Hello", "World", "123")
+	err := Echo(&buf, "Hello World 123")
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
