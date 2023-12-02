@@ -19,11 +19,11 @@ func TestCommandAliasPrintAliases(t *testing.T) {
 
 func TestCommandAliasAddAlias(t *testing.T) {
 	var buf bytes.Buffer
-	err := CommandAlias(&buf, "newAlias", "=", "echo \"Hello, World!\"")
+	err := CommandAlias(&buf, "newAlias = \"echo Hello, World!\"")
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
-	expectedOutput := "new alias is: newAlias = echo \"Hello, World!\""
+	expectedOutput := "Alias name: newAlias, Alias value: echo Hello, World!"
 	if got := buf.String(); got != expectedOutput {
 		t.Errorf("Expected output %q, got %q", expectedOutput, got)
 	}
