@@ -11,14 +11,7 @@ func TestHelpNoArgs(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected no error, got %w", err)
 	}
-	expectedOutput := "cd
-	cat
-	pwd
-	alias
-	help
-	env
-	echo
-	"
+	expectedOutput := "cd\ncat\npwd\nalias\nhelp\nenv\necho\n"
 	if got := buf.String(); got != expectedOutput {
 		t.Errorf("Expected output: %q, got %q", expectedOutput, got)
 	}
