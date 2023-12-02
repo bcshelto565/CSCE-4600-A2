@@ -2,7 +2,6 @@ package builtins
 
 import (
 	"bytes"
-	"fmt"
 	"testing"
 )
 
