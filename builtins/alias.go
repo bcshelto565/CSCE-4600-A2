@@ -30,6 +30,7 @@ func printComs(aliasSlic []ComAlias) string {		// simple for loop function to pr
 }
 
 func CommandAlias(w io.Writer, args ...string) (string, error) {
+	var output string
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
 		return "", fmt.Errorf("%w: expected at least one argument, one for print or write of a name, and one for value of alias", ErrInvalidArgCountAlias)
@@ -45,7 +46,7 @@ func CommandAlias(w io.Writer, args ...string) (string, error) {
 	case 3:
 		aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
 		// fmt.Println("new alias is: ", args[0], " = ", args[2])
-		output := strings.Join("new alias is: ", args[0], " = ", args[2])
+		output += "new alias is: ", string(args[0]), " = ", string(args[2]))
 		return output, nil
 	default:
 		return "", fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
