@@ -64,7 +64,7 @@ func printPrompt(w io.Writer) error {
 	return err
 }
 
-func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
+func handleInput(w io.Writer, input string, exit chan<- struct{}) (string, error) {
 	// Remove trailing spaces.
 	input = strings.TrimSpace(input)
 
@@ -76,9 +76,9 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 	// New builtin commands should be added here. Eventually this should be refactored to its own func.
 	switch name {
 	case "cd":
-		return builtins.ChangeDirectory(args...)
+		return "", builtins.ChangeDirectory(args...)
 	case "env":
-		return builtins.EnvironmentVariables(w, args...)
+		return "", builtins.EnvironmentVariables(w, args...)
 	case "alias":
 		return builtins.CommandAlias(w, args...)
 	case "echo":
@@ -91,7 +91,7 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.PrintCurrentDir(w, args...)
 	case "exit":
 		exit <- struct{}{}
-		return nil
+		return "", nil
 	}
 
 	return executeCommand(name, args...)
