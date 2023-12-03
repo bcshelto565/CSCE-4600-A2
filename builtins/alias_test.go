@@ -7,7 +7,7 @@ import (
 
 func TestCommandAliasPrintAliases(t *testing.T) {
 	var buf bytes.Buffer
-	err := CommandAlias(&buf, "-p")
+	str, err := CommandAlias(&buf, "-p")
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
@@ -19,7 +19,7 @@ func TestCommandAliasPrintAliases(t *testing.T) {
 
 func TestCommandAliasAddAlias(t *testing.T) {
 	var buf bytes.Buffer
-	err := CommandAlias(&buf, "newAlias = \"echo Hello, World!\"")
+	str, err := CommandAlias(&buf, "newAlias = \"echo Hello, World!\"")
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
@@ -31,7 +31,7 @@ func TestCommandAliasAddAlias(t *testing.T) {
 
 func TestCommandAliasInvalidArgs(t *testing.T) {
 	var buf bytes.Buffer
-	err := CommandAlias(&buf)
+	str, err := CommandAlias(&buf)
 	if err != ErrInvalidArgCountAlias {
 		t.Errorf("Expected error %v, got %v", ErrInvalidArgCountAlias, err)
 	}
