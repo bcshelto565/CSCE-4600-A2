@@ -32,7 +32,7 @@ func CommandAlias(w io.Writer, args ...string) (string, error) {
 	case 1:
 		if args[0] == "-p" {
 			output := string(printComs(aliasSlic))
-			return (output, nil)
+			return output, nil
 		} else {
 			return "", fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
 		}
@@ -41,7 +41,8 @@ func CommandAlias(w io.Writer, args ...string) (string, error) {
 	case 3:
 		aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
 		// fmt.Println("new alias is: ", args[0], " = ", args[2])
-		return (string("new alias is: ", args[0], " = ", args[2]), nil)
+		output := string("new alias is: ", args[0], " = ", args[2])
+		return output, nil
 	default:
 		return "", fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
 	}
