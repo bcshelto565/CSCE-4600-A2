@@ -23,10 +23,7 @@ func printComs(aliasSlic []ComAlias) string {		// simple for loop function to pr
 	for _, ComAlias := range aliasSlic {
 		nam := ComAlias.name
 		val := ComAlias.value
-		output := string("Alias name: ")
-		output.Append(nam)
-		output.Append(", Alias value: ")
-		output.Append(val)
+		output := "Alias name: " + nam + ", Alias value: " + val
 	}
 	return output
 }
