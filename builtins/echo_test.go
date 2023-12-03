@@ -7,7 +7,7 @@ import (
 
 func TestEchoWithArgs(t *testing.T) {
 	var buf bytes.Buffer
-	err, _ := Echo(&buf, "Hello World 123")
+	err := Echo(&buf, "Hello World 123")
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
@@ -19,7 +19,7 @@ func TestEchoWithArgs(t *testing.T) {
 
 func TestEchoNoArgs(t *testing.T) {
 	var buf bytes.Buffer
-	err, _ := Echo(&buf)
+	err := Echo(&buf)
 	if err != ErrInvalidArgCountEcho {
 		t.Errorf("Expected error %v, got %v", ErrInvalidArgCountEcho, err)
 	}
