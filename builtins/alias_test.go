@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+var str string
+
 func TestCommandAliasPrintAliases(t *testing.T) {
 	var buf bytes.Buffer
 	str, err := CommandAlias(&buf, "-p")
