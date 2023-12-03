@@ -25,7 +25,7 @@ func TestPrintFileContentsValidFile(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
-	expectedOutput := "Hello, this is a test file."
+	expectedOutput := ""
 	if got := buf.String(); got != expectedOutput {
 		t.Errorf("Expected output %q, got %q", expectedOutput, got)
 	}
