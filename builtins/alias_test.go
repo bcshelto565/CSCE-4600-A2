@@ -33,8 +33,10 @@ func TestCommandAliasAddAlias(t *testing.T) {
 		t.Errorf("Expected no error, got %v", err)
 	}
 	stringUser(str)
-	expectedOutput := "Alias name: newAlias, Alias value: whoami"
-	if got := buf.String(); got != expectedOutput {
+	var expectedOutput string
+	expectedOutput = "Alias name: newAlias, Alias value: whoami"
+	got := buf.String()
+	if got != expectedOutput {
 		t.Errorf("Expected output %q, got %q", expectedOutput, got)
 	}
 }
