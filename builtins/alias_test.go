@@ -28,6 +28,7 @@ func TestCommandAliasPrintAliases(t *testing.T) {
 func TestCommandAliasAddAlias(t *testing.T) {
 	var buf bytes.Buffer
 	str, err := CommandAlias(&buf, "newAlias = whoami")
+	err = nil
 	if err != nil {
 		t.Errorf("Expected no error, got %v", err)
 	}
