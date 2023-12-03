@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"strings"
 )
 
 var (
@@ -32,10 +33,10 @@ func CommandAlias(w io.Writer, args ...string) (error) {
 	var output string
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
-		return "", fmt.Errorf("%w", ErrInvalidArgCountAlias)
+		return fmt.Errorf("%w", ErrInvalidArgCountAlias)
 	case 1:
 		if args[0] == "-p" {
-			output := string(printComs(aliasSlic))
+			// output := string(printComs(aliasSlic))
 			_, err := fmt.Fprintln(w, strings.Join(string(printComs(aliasSlic))))
 			return err
 		} else {
