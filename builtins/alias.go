@@ -18,11 +18,11 @@ type ComAlias struct {			// struct for new custom alias entries
 
 var aliasSlic []ComAlias		// slice for holding all the custom alias entries
 
-func printComs(aliasSlic []ComAlias) {		// simple for loop function to print entries
+func printComs(aliasSlic []ComAlias) string {		// simple for loop function to print entries
 	for _, ComAlias := range aliasSlic {
-		fmt.Printf("Alias name: %s, Alias value: %s", ComAlias.name, ComAlias.value)
+		output := fmt.Printf("Alias name: %s, Alias value: %s", ComAlias.name, ComAlias.value)
 	}
-	return
+	return output
 }
 
 func CommandAlias(w io.Writer, args ...string) (string, error) {
@@ -41,7 +41,7 @@ func CommandAlias(w io.Writer, args ...string) (string, error) {
 	case 3:
 		aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
 		// fmt.Println("new alias is: ", args[0], " = ", args[2])
-		output := string("new alias is: ", args[0], " = ", args[2])
+		output := string.Join("new alias is: ", args[0], " = ", args[2])
 		return output, nil
 	default:
 		return "", fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
