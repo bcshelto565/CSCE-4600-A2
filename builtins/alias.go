@@ -37,7 +37,9 @@ func CommandAlias(w io.Writer, args ...string) (error) {
 	case 1:
 		if args[0] == "-p" {
 			// output := string(printComs(aliasSlic))
-			_, err := fmt.Fprintln(w, strings.Join(string(printComs(aliasSlic)), "\n"))
+			output := make([]string, 0)
+			output = append(output, string(printComs(aliasSlic)))
+			_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
 			return err
 		} else {
 			return fmt.Errorf("%w", ErrInvalidArgCountAlias)
