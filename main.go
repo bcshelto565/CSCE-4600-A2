@@ -96,7 +96,7 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) (string, error
 		return "", nil
 	}
 
-	return executeCommand(name, args...)
+	return "", executeCommand(name, args...)
 }
 
 func executeCommand(name string, arg ...string) error {
