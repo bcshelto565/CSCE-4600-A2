@@ -18,6 +18,8 @@ func main() {
 	runLoop(os.Stdin, os.Stdout, os.Stderr, exit)
 }
 
+var str string
+
 func runLoop(r io.Reader, w, errW io.Writer, exit chan struct{}) {
 	var (
 		input    string
@@ -38,7 +40,7 @@ func runLoop(r io.Reader, w, errW io.Writer, exit chan struct{}) {
 				_, _ = fmt.Fprintln(errW, err)
 				continue
 			}
-			if err = handleInput(w, input, exit); err != nil {
+			if str, err = handleInput(w, input, exit); err != nil {
 				_, _ = fmt.Fprintln(errW, err)
 			}
 		}
