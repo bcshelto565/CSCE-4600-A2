@@ -28,7 +28,7 @@ func printComs(aliasSlic []ComAlias) string {		// simple for loop function to pr
 	return output
 }
 
-func CommandAlias(w io.Writer, args ...string) (string, error) {
+func CommandAlias(w io.Writer, args ...string) (error) {
 	var output string
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
@@ -36,20 +36,23 @@ func CommandAlias(w io.Writer, args ...string) (string, error) {
 	case 1:
 		if args[0] == "-p" {
 			output := string(printComs(aliasSlic))
-			return output, nil
+			_, err := fmt.Fprintln(w, strings.Join(string(printComs(aliasSlic))))
+			return err
 		} else {
-			return "", fmt.Errorf("%w", ErrInvalidArgCountAlias)
+			return fmt.Errorf("%w", ErrInvalidArgCountAlias)
+			// _, err := fmt.Fprintln(w, strings.Join(toShow, "\n"))
 		}
 	case 2:
-		return "", fmt.Errorf("%w: missing arguments, alias needs to be used in the following syntax: alias update = \"sudo apt-get update\" ensure the \"\" quotes are used to define the command", ErrInvalidArgCountAlias)
+		return fmt.Errorf("%w: missing arguments, alias needs to be used in the following syntax: alias update = \"sudo apt-get update\" ensure the \"\" quotes are used to define the command", ErrInvalidArgCountAlias)
 	case 3:
 		aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
 		// fmt.Println("new alias is: ", args[0], " = ", args[2])
 		arg1 := args[0]
 		arg2 := args[2]
 		output += "new alias is: " + arg1 + " = " + arg2
-		return output, nil
+		_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+		return err
 	default:
-		return "", fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
+		return fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
 	}
 }
