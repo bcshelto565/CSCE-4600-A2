@@ -20,10 +20,11 @@ type ComAlias struct {			// struct for new custom alias entries
 var aliasSlic []ComAlias		// slice for holding all the custom alias entries
 
 func printComs(aliasSlic []ComAlias) string {		// simple for loop function to print entries
+	var output string
 	for _, ComAlias := range aliasSlic {
 		nam := ComAlias.name
 		val := ComAlias.value
-		output := "Alias name: " + nam + ", Alias value: " + val
+		output += "Alias name: " + nam + ", Alias value: " + val + "\n"
 	}
 	return output
 }
