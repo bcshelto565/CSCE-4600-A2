@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"strings"
 )
 
 var (
@@ -41,7 +42,7 @@ func CommandAlias(w io.Writer, args ...string) (string, error) {
 	case 3:
 		aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
 		// fmt.Println("new alias is: ", args[0], " = ", args[2])
-		output := string.Join("new alias is: ", args[0], " = ", args[2])
+		output := strings.Join("new alias is: ", args[0], " = ", args[2])
 		return output, nil
 	default:
 		return "", fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
