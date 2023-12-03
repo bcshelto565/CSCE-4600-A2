@@ -30,14 +30,14 @@ func printComs(aliasSlic []ComAlias) string {		// simple for loop function to pr
 }
 
 func CommandAlias(w io.Writer, args ...string) (error) {
-	var output string
+	// var output string
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
 		return fmt.Errorf("%w", ErrInvalidArgCountAlias)
 	case 1:
 		if args[0] == "-p" {
 			// output := string(printComs(aliasSlic))
-			_, err := fmt.Fprintln(w, strings.Join(string(printComs(aliasSlic))))
+			_, err := fmt.Fprintln(w, strings.Join(string(printComs(aliasSlic)), "\n"))
 			return err
 		} else {
 			return fmt.Errorf("%w", ErrInvalidArgCountAlias)
