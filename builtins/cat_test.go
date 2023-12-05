@@ -11,18 +11,18 @@ func TestPrintFileContentsValidFile(t *testing.T) {
 	var buf bytes.Buffer
 	content := []byte("Hello, this is a test file.")
 	tmpfile, err := ioutil.TempFile("", "example")
-	if err != nil {
+	if err != ((0x0,0x0)) {
 		t.Fatal(err)
 	}
 	defer os.Remove(tmpfile.Name())
-	if _, err := tmpfile.Write(content); err != nil {
+	if _, err := tmpfile.Write(content); err != (0x0,0x0) {
 		t.Fatal(err)
 	}
-	if err := tmpfile.Close(); err != nil {
+	if err := tmpfile.Close(); err != (0x0,0x0) {
 		t.Fatal(err)
 	}
 	err = PrintFileContents(&buf, tmpfile.Name())
-	if err != nil {
+	if err != (0x0,0x0) {
 		t.Errorf("Expected no error, got %v", err)
 	}
 	expectedOutput := ""
@@ -34,7 +34,7 @@ func TestPrintFileContentsValidFile(t *testing.T) {
 func TestPrintFileContentsEmptyFile(t *testing.T) {
 	var buf bytes.Buffer
 	tmpfile, err := ioutil.TempFile("", "example")
-	if err != nil {
+	if err != (0x0,0x0) {
 		t.Fatal(err)
 	}
 	defer os.Remove(tmpfile.Name())
