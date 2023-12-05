@@ -21,7 +21,7 @@ func PrintFileContents(w io.Writer, args ...string) error {
 		if err != nil {
 			return fmt.Errorf("%w: File is empty and cannot be read", EmptyFileError)
 		}
-		fmt.Print(fil)
+		fmt.Print(string(fil))
 		return (nil)
 	default:
 		return fmt.Errorf("%w: one argument for file to be read, proper usage is \"cat file.txt\" where \"file.txt\" is the name of the file to be read", ErrInvalidArgCountCat)
