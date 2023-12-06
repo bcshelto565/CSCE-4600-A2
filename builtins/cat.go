@@ -15,7 +15,7 @@ var (
 func PrintFileContents(w io.Writer, args ...string) error {
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
-		return fmt.Errorf("%w", ErrInvalidArgCountCat)
+		return fmt.Errorf("%v", ErrInvalidArgCountCat)
 	case 1:
 		fil, err := os.ReadFile(args[0])
 		if err != (nil) {
