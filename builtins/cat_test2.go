@@ -1,12 +1,12 @@
-package builtins
+package builtins_test
 
 import (
 	"errors"
-	"github.com/jh125486/CSCE4600/Project2/builtins"
+	"github.com/bcshelto565/CSCE-4600-A2/builtins"
 	"os"
 	"testing"
 	"io/ioutil"
-	"./cat.go"
+	// "./cat.go"
 	// "builtins"
 )
 
