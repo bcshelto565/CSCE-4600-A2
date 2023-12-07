@@ -43,7 +43,7 @@ func TestPrintFileContents(t *testing.T) {
 		},
 		{
 			name:    "no args should throw invalid args error",
-      args: args{
+      			args: args{
 				args: []string{" "},
 			},
 			wantErr: builtins.ErrInvalidArgCountCat,
