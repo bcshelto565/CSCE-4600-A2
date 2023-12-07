@@ -54,7 +54,7 @@ func TestPrintFileContents(t *testing.T) {
 		{
 			name: "one arg should print file contents",
 			args: args{
-				args: []string{tmpfile},
+				args: []string{Name(tmpfile)},
 			},
 			wantFile: tempstring,
 		},
