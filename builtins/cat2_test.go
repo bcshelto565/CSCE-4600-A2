@@ -23,6 +23,7 @@ func TestPrintFileContents(t *testing.T) {
 		t.Fatalf("tempfile not opened, error = %v", temperr)
 	}
 	tempstring := "example"
+	filNam := tmpfile.Name
 	type args struct {
 		args []string
 	}
@@ -54,7 +55,7 @@ func TestPrintFileContents(t *testing.T) {
 		{
 			name: "one arg should print file contents",
 			args: args{
-				args: []string{tmpfile.Name},
+				args: []string{filNam},
 			},
 			wantFile: tempstring,
 		},
