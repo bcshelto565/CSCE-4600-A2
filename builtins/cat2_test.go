@@ -72,7 +72,7 @@ func TestPrintFileContents(t *testing.T) {
 			}*/
 
 			// testing
-			if err := builtins.PrintFileContents(tt.args.args...); tt.wantErr != nil {
+			if err := builtins.PrintFileContents(&out, tt.args.args...); tt.wantErr != nil {
 				if !errors.Is(err, tt.wantErr) {
 					t.Fatalf("PrintFileContents() error = %v, wantErr %v", err, tt.wantErr)
 				}
