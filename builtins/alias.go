@@ -52,8 +52,10 @@ func CommandAlias(w io.Writer, args ...string) (error) {
 		// fmt.Println("new alias is: ", args[0], " = ", args[2])
 		arg1 := args[0]
 		arg2 := args[2]
-		output := make([]string, 0)
-		output = append(output, "new alias is: ", arg1, " = ", arg2)
+		var output string
+		output = "new alias is: " + arg1 + " = " + arg2
+		/*output := make([]string, 0)
+		output = append(output, "new alias is: ", arg1, " = ", arg2)*/
 		// output += "new alias is: " + arg1 + " = " + arg2
 		_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
 		return err
