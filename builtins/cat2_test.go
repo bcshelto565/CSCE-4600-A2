@@ -29,6 +29,7 @@ func TestPrintFileContents(t *testing.T) {
 		t.Fatalf("tempfile not opened, error = %v", temperr)
 	}
 	tmpfile.Write(tempstring)
+	filNam2 := tmpfile2.Name()
 	type args struct {
 		args []string
 	}
@@ -56,7 +57,7 @@ func TestPrintFileContents(t *testing.T) {
 		{
 			name:         "no file contents should throw empty file error",
 			args: args{
-				args: []string{filNam},
+				args: []string{filNam2},
 			},
 			wantErr:      builtins.EmptyFileError,
 		},
