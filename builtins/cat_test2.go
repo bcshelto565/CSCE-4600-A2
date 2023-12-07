@@ -12,6 +12,9 @@ import (
 func TestPrintFileContents(t *testing.T) {
 	// tmp := t.TempDir()
 	tmpfile, temperr := ioutil.TempFile("", "example")
+	if temperr != nil {
+		t.Fatalf("tempfile not opened, error = %v", temperr)
+	}
 	tempstring := "example"
 	type args struct {
 		args []string
