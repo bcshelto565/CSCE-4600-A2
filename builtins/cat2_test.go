@@ -56,7 +56,7 @@ func TestPrintFileContents(t *testing.T) {
 		{
 			name:         "no file contents should throw empty file error",
 			args: args{
-				args: []string{""},
+				args: []string{filNam},
 			},
 			wantErr:      builtins.EmptyFileError,
 		},
