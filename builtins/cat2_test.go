@@ -82,7 +82,7 @@ func TestPrintFileContents(t *testing.T) {
 			}
 
 			// "happy" path
-			file, err := os.Open(tmpfile)
+			file, err := os.Open(filNam)
 			if err != nil {
 				t.Fatalf("Could not open temp file")
 			}
