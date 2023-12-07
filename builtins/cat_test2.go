@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 	"io/ioutil"
-	"builtins/cat.go"
+	"../cat.go"
 	// "builtins"
 )
 
