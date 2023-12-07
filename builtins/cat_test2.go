@@ -9,6 +9,12 @@ import (
 	// "builtins"
 )
 
+
+var (
+	ErrInvalidArgCountCat = errors.New("invalid argument count")
+	EmptyFileError = errors.New("invalid file")
+)
+
 func TestPrintFileContents(t *testing.T) {
 	// tmp := t.TempDir()
 	tmpfile, temperr := ioutil.TempFile("", "example")
