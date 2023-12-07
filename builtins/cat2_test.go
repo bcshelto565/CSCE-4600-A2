@@ -24,6 +24,11 @@ func TestPrintFileContents(t *testing.T) {
 	}
 	tempstring := "example"
 	filNam := tmpfile.Name()
+	tmpfile2, temperr2 := ioutil.TempFile("", "example2")
+	if temperr2 != nil {
+		t.Fatalf("tempfile not opened, error = %v", temperr)
+	}
+	tmpfile.Write(tempstring)
 	type args struct {
 		args []string
 	}
@@ -44,12 +49,15 @@ func TestPrintFileContents(t *testing.T) {
 		{
 			name:    "no args should throw invalid args error",
       			args: args{
-				args: []string{" "},
+				args: []string{""},
 			},
 			wantErr: builtins.ErrInvalidArgCountCat,
 		},
 		{
 			name:         "no file contents should throw empty file error",
+			args: args{
+				args: []string{""},
+			},
 			wantErr:      builtins.EmptyFileError,
 		},
 		{
