@@ -23,6 +23,9 @@ func PrintFileContents(w io.Writer, args ...string) error {
 		}
 		file_stat, staterr := os.Stat(args[0])
 		file_size := file_stat.Size()
+		if staterr != (nil) {
+			return fmt.Errorf("%w: File is empty and cannot be read", EmptyFileError)
+		}
 		if file_size == 0 {
 			return fmt.Errorf("%w: File is empty and cannot be read", EmptyFileError)
 		}
