@@ -23,7 +23,7 @@ func TestPrintFileContents(t *testing.T) {
 		t.Fatalf("tempfile not opened, error = %v", temperr)
 	}
 	tempstring := "example"
-	filNam := tmpfile.Name
+	filNam := tmpfile.Name()
 	type args struct {
 		args []string
 	}
