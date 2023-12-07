@@ -28,7 +28,7 @@ func TestPrintFileContents(t *testing.T) {
 	if temperr2 != nil {
 		t.Fatalf("tempfile not opened, error = %v", temperr)
 	}
-	tmpfile.Write("example")
+	tmpfile.WriteString("example")
 	filNam2 := tmpfile2.Name()
 	type args struct {
 		args []string
