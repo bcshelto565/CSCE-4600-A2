@@ -11,8 +11,8 @@ import (
 
 
 var (
-	ErrInvalidArgCountCat = errors.New("invalid argument count")
-	EmptyFileError = errors.New("invalid file")
+	/*ErrInvalidArgCountCat = errors.New("invalid argument count")
+	EmptyFileError = errors.New("invalid file")*/
 )
 
 func TestPrintFileContents(t *testing.T) {
