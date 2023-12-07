@@ -2,7 +2,7 @@ package builtins
 
 import (
 	"errors"
-	"github.com/bcshelto565/CSCE-4600-A2/builtins"
+	"github.com/jh125486/CSCE4600/Project2/builtins"
 	"os"
 	"testing"
 	"io/ioutil"
