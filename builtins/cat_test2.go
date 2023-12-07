@@ -5,12 +5,14 @@ import (
 	// "github.com/jh125486/CSCE4600/Project2/builtins"
 	"os"
 	"testing"
+	"ioutil"
+	"builtins"
 )
 
 func TestPrintFileContents(t *testing.T) {
-	tmp := t.TempDir()
-  tmpfile, temperr := ioutil.TempFile("", "example")
-  tempstring := "example"
+	// tmp := t.TempDir()
+	tmpfile, temperr := ioutil.TempFile("", "example")
+	tempstring := "example"
 	type args struct {
 		args []string
 	}
@@ -73,6 +75,7 @@ func TestPrintFileContents(t *testing.T) {
 			if err != nil {
 				t.Fatalf("Could not open temp file")
 			}
+			file.Close()
 			/*d1, err := os.Stat(wd)
 			if err != nil {
 				t.Fatalf("Could not stat dir: %v", wd)
