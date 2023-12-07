@@ -53,11 +53,11 @@ func CommandAlias(w io.Writer, args ...string) (error) {
 		arg1 := args[0]
 		arg2 := args[2]
 		var output string
-		output = "new alias is: " + arg1 + " = " + arg2
+		output = "new alias is: " + arg1 + " = " + arg2 + "\n"
 		/*output := make([]string, 0)
 		output = append(output, "new alias is: ", arg1, " = ", arg2)*/
 		// output += "new alias is: " + arg1 + " = " + arg2
-		_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+		_, err := fmt.Fprintln(w, output)
 		return err
 	default:
 		return fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)
