@@ -46,7 +46,7 @@ func TestCommandAlias(t *testing.T) {
 			args: args{
 				args: []string{"-p"},
 			},
-			wantOut: fmt.Println("\n"),
+			wantOut: fmt.Sprintln(""),
 		},
 		{
 			name: "valid arguments should add to list",
