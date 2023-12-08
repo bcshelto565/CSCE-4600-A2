@@ -22,9 +22,10 @@ func TestCommandAlias(t *testing.T) {
 	tests := []struct {
 		name         string
 		args         args
-    listExist    bool
+    		listExist    bool
 		wantFile     string
 		wantErr      error
+		wantOut string
 	}{
 		{
 			name: "error too many args",
