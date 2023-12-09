@@ -43,8 +43,8 @@ func Help(w io.Writer, args ...string) error {
 		for _, s := range HelpList {
 			helpList = append(helpList, s)
 		}
-		_, err := fmt.Fprintln(w, strings.Join(helpList, "\n"))
-		return err
+		_, err2 := fmt.Fprintln(w, strings.Join(helpList, "\n"))
+		return err2
 		// return fmt.Errorf("%w", NonError)
 	default:
 		return fmt.Errorf("%w", ErrInvalidArgCountHelp)
