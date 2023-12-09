@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	ErrInvalidArgCountHelp = errors.New("invalid argument count")
+	ErrInvalidArgCountHelp = errors.New("invalid argument count: expected no arguments for help. help prints out available builtin commands")
 )
 
 var HelpList []string
@@ -36,11 +36,16 @@ func Help(w io.Writer, args ...string) error {
 				HelpList = append(HelpList, fileNam)
 			}
 		}
+		helpList := make([]string, 0)
+		// justargs := strings.Join(args,"")
+		
 		for _, s := range HelpList {
-			fmt.Println(s)
+			helpList = append(helpList, s)
 		}
-		return fmt.Errorf("%w", NonError)
+		_, err := fmt.Fprintln(w, strings.Join(helpList, "\n"))
+		return err
+		// return fmt.Errorf("%w", NonError)
 	default:
-		return fmt.Errorf("%w: expected no arguments for help. help prints out available builtin commands", ErrInvalidArgCountHelp)
+		return fmt.Errorf("%w", ErrInvalidArgCountHelp)
 	}
 }
