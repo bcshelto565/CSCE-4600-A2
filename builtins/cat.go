@@ -9,7 +9,6 @@ import (
 )
 
 var (
-	// ErrInvalidArgCountCat = errors.New("invalid argument count")
 	EmptyFileError = errors.New("invalid file")
 )
 
