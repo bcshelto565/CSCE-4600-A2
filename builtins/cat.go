@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"io"
+	"github.com/jh125486/CSCE4600/Project2/builtins"
 )
 
 var (
@@ -15,7 +16,7 @@ var (
 func PrintFileContents(w io.Writer, args ...string) error {
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
-		return fmt.Errorf("%v", ErrInvalidArgCountCat)
+		return fmt.Errorf("%v", ErrInvalidArgCount)
 	case 1:
 		fil, err := os.ReadFile(args[0])
 		if err != (nil) {
@@ -32,6 +33,6 @@ func PrintFileContents(w io.Writer, args ...string) error {
 		fmt.Print(string(fil))
 		return (nil)
 	default:
-		return fmt.Errorf("%w: one argument for file to be read, proper usage is \"cat file.txt\" where \"file.txt\" is the name of the file to be read", ErrInvalidArgCountCat)
+		return fmt.Errorf("%w: one argument for file to be read, proper usage is \"cat file.txt\" where \"file.txt\" is the name of the file to be read", ErrInvalidArgCount)
 	}
 }
