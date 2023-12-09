@@ -25,7 +25,7 @@ func TestChangeDirectory(t *testing.T) {
 			args: args{
 				args: []string{"abc", "def"},
 			},
-			wantErr: builtins.ErrInvalidArgCountCd,
+			wantErr: builtins.ErrInvalidArgCount,
 		},
 		{
 			name:    "no args should change to homedir if available",
@@ -34,7 +34,7 @@ func TestChangeDirectory(t *testing.T) {
 		{
 			name:         "no args should error if homedir is blank",
 			unsetHomedir: true,
-			wantErr:      builtins.ErrInvalidArgCountCd,
+			wantErr:      builtins.ErrInvalidArgCount,
 		},
 		{
 			name: "one arg should change to dir",
