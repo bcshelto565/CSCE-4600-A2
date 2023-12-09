@@ -17,7 +17,8 @@ func Echo(w io.Writer, args ...string) (error) {
 	case 0:
 		return fmt.Errorf("%w: expected at least one argument, echo is used to echo a string, need a string to echo", ErrInvalidArgCountEcho)
 	default:
-		ech := fmt.Sprint(args)
+		ech := make([]string, 0)
+		ech = append(ech, args)
 		// PlaceholderErr = errors.New(ech)
 		_, err := fmt.Fprintln(w, strings.Join(ech, "\n"))
 		return err
