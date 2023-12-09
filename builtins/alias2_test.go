@@ -68,13 +68,13 @@ func TestCommandAlias(t *testing.T) {
 			}*/
 
 			// testing
-			if err := builtins.PrintFileContents(&out, tt.args.args...); tt.wantErr != nil {
+			if err := builtins.CommandAlias(&out, tt.args.args...); tt.wantErr != nil {
 				if !errors.Is(err, tt.wantErr) {
-					t.Fatalf("PrintFileContents() error = %v, wantErr %v", err, tt.wantErr)
+					t.Fatalf("CommandAlias() error = %v, wantErr %v", err, tt.wantErr)
 				}
 				return
 			} else if err != nil {
-				t.Fatalf("PrintFileContents() unexpected error: %v", err)
+				t.Fatalf("CommandAlias() unexpected error: %v", err)
 			}
 
 			// "happy" path
