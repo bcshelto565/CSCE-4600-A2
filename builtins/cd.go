@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	// ErrInvalidArgCountCd = errors.New("invalid argument count")
+	ErrInvalidArgCountCd = errors.New("invalid argument count")
 	HomeDir, _         = os.UserHomeDir()
 )
 
