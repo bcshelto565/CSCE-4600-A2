@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"io"
-	"string"
 )
 
 var (
