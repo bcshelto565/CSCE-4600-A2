@@ -8,12 +8,6 @@ import (
 	// "fmt"
 )
 
-
-var (
-	/*ErrInvalidArgCountCat = errors.New("invalid argument count")
-	EmptyFileError = errors.New("invalid file")*/
-)
-
 func TestHelp(t *testing.T) {
   var out bytes.Buffer
 	type args struct {
@@ -41,24 +35,9 @@ func TestHelp(t *testing.T) {
 			},
 			wantErr: nil,
 		},
-		/*{
-			name: "builtins not found should throw missing dir error",
-			missinB: true,
-        		args: args{
-				  args: []string{},
-			},
-			wantErr: builtins.ErrMissingBuiltins,
-		},*/
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			/*if tt.missinB {
-				oldVal := builtins.HomeDir
-				t.Cleanup(func() {
-					builtins.HomeDir = oldVal
-				})
-				builtins.HomeDir = ""
-			}*/
 			// testing
 			if err := builtins.Help(&out, tt.args.args...); tt.wantErr != nil {
 				if !errors.Is(err, tt.wantErr) {
