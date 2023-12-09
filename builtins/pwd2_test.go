@@ -8,12 +8,6 @@ import (
 	// "fmt"
 )
 
-
-var (
-	/*ErrInvalidArgCountCat = errors.New("invalid argument count")
-	EmptyFileError = errors.New("invalid file")*/
-)
-
 func TestPrintCurrentDir(t *testing.T) {
   var out bytes.Buffer
 	type args struct {
