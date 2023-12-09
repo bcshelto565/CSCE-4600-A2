@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"testing"
+	"github.com/jh125486/CSCE4600/Project2/builtins"
 )
 
 func TestPrintFileContentsValidFile(t *testing.T) {
