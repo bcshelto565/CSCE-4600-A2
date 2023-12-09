@@ -18,6 +18,7 @@ func Echo(w io.Writer, args ...string) (error) {
 	default:
 		ech := fmt.Sprint(args)
 		// PlaceholderErr = errors.New(ech)
-		return fmt.Sprintln(ech)
+		_, err := fmt.Fprintln(w, strings.Join(ech, "\n"))
+		return err
 	}
 }
