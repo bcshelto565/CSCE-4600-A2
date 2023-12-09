@@ -33,6 +33,6 @@ func PrintFileContents(w io.Writer, args ...string) error {
 		fmt.Print(string(fil))
 		return (nil)
 	default:
-		return fmt.Errorf("%w: one argument for file to be read, proper usage is \"cat file.txt\" where \"file.txt\" is the name of the file to be read", builtins.ErrInvalidArgCount)
+		return fmt.Errorf("%w", builtins.ErrInvalidArgCount)
 	}
 }
