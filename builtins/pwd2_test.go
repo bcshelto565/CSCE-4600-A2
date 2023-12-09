@@ -22,7 +22,7 @@ func TestPrintCurrentDir(t *testing.T) {
 	tests := []struct {
 		name         string
 		args         args
-    missinB      bool
+    		missinB      bool
 		wantFile     string
 		wantErr      error
 		wantOut      string
@@ -34,7 +34,7 @@ func TestPrintCurrentDir(t *testing.T) {
 			},
 			wantErr: nil,
 		},
-    {
+    		{
 			name: "args passed should not throw error Physical",
 			args: args{
 				args: []string{"-P"},
@@ -42,8 +42,8 @@ func TestPrintCurrentDir(t *testing.T) {
 			wantErr: nil,
 		},
 		{
-			  name: "no args should print working directory",
-        args: args{
+			name: "no args should print working directory",
+        		args: args{
 				args: []string{},
 			},
 			wantErr: nil,
