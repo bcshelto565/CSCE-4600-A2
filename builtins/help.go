@@ -43,7 +43,7 @@ func Help(w io.Writer, args ...string) error {
 		for _, s := range HelpList {
 			helpList = append(helpList, s)
 		}
-		__, err := fmt.Fprintln(w, strings.Join(helpList, "\n"))
+		_, err := fmt.Fprintln(w, strings.Join(helpList, "\n"))
 		return err
 		// return fmt.Errorf("%w", NonError)
 	default:
