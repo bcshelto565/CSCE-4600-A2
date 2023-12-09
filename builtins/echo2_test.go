@@ -14,7 +14,7 @@ var (
 	EmptyFileError = errors.New("invalid file")*/
 )
 
-func TestCommandAlias(t *testing.T) {
+func TestEcho(t *testing.T) {
   var out bytes.Buffer
 	type args struct {
 		args []string
@@ -22,7 +22,6 @@ func TestCommandAlias(t *testing.T) {
 	tests := []struct {
 		name         string
 		args         args
-    listExist    bool
 		wantFile     string
 		wantErr      error
 		wantOut      string
