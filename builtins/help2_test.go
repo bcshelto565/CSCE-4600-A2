@@ -22,7 +22,7 @@ func TestHelp(t *testing.T) {
 	tests := []struct {
 		name         string
 		args         args
-    missinB      bool
+    		missinB      bool
 		wantFile     string
 		wantErr      error
 		wantOut      string
@@ -35,16 +35,16 @@ func TestHelp(t *testing.T) {
 			wantErr: builtins.ErrInvalidArgCountHelp,
 		},
 		{
-			  name: "no args should print helpList",
-        args: args{
+			name: "no args should print helpList",
+        		args: args{
 				args: []string{},
 			},
 			wantErr: nil,
 		},
 		/*{
-			  name: "builtins not found should throw missing dir error",
-			  missinB: true,
-        args: args{
+			name: "builtins not found should throw missing dir error",
+			missinB: true,
+        		args: args{
 				  args: []string{},
 			},
 			wantErr: builtins.ErrMissingBuiltins,
