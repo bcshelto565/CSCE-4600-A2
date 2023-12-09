@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"io"
+	"string"
 )
 
 var (
@@ -14,15 +15,24 @@ var (
 func PrintCurrentDir(w io.Writer, args ...string) error {
 	switch len(args) {
 	case 0: // print current working directory
-		fmt.Println(os.Getwd())
-		return fmt.Errorf("%w", NonError)
+		pwd := string(os.Getwd())
+		output := make([]string, 0)
+		output = append(output, pwd)
+		_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+		return err
 	case 1:
 		if (args[0] == "-L") {
-			fmt.Println(os.Getwd())
-			return fmt.Errorf("%w", NonError)
+			pwd := string(os.Getwd())
+			output := make([]string, 0)
+			output = append(output, pwd)
+			_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+			return err
 		} else if (args[0] == "-P") {
-			fmt.Println(os.Getwd())
-			return fmt.Errorf("%w", NonError)
+			pwd := string(os.Getwd())
+			output := make([]string, 0)
+			output = append(output, pwd)
+			_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+			return err
 		} else {
 			return fmt.Errorf("%w: expected zero or one arguments -L for logical working directory address and -P for physical working directory address", ErrInvalidArgCountPwd)
 		}
