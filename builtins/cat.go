@@ -9,14 +9,14 @@ import (
 )
 
 var (
-	ErrInvalidArgCountCat = errors.New("invalid argument count")
+	// ErrInvalidArgCountCat = errors.New("invalid argument count")
 	EmptyFileError = errors.New("invalid file")
 )
 
 func PrintFileContents(w io.Writer, args ...string) error {
 	switch len(args) {		// switch case for determining how to run the command
 	case 0:
-		return fmt.Errorf("%v", ErrInvalidArgCount)
+		return fmt.Errorf("%v", builtins.ErrInvalidArgCount)
 	case 1:
 		fil, err := os.ReadFile(args[0])
 		if err != (nil) {
@@ -33,6 +33,6 @@ func PrintFileContents(w io.Writer, args ...string) error {
 		fmt.Print(string(fil))
 		return (nil)
 	default:
-		return fmt.Errorf("%w: one argument for file to be read, proper usage is \"cat file.txt\" where \"file.txt\" is the name of the file to be read", ErrInvalidArgCount)
+		return fmt.Errorf("%w: one argument for file to be read, proper usage is \"cat file.txt\" where \"file.txt\" is the name of the file to be read", builtins.ErrInvalidArgCount)
 	}
 }
