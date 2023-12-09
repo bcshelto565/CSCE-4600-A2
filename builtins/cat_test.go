@@ -47,8 +47,8 @@ func TestPrintFileContentsEmptyFile(t *testing.T) {
 func TestPrintFileContentsInvalidArgs(t *testing.T) {
 	var buf bytes.Buffer
 	err := PrintFileContents(&buf)
-	if err != ErrInvalidArgCountCat {
-		t.Errorf("Expected error %v, got %v", ErrInvalidArgCountCat, err)
+	if err != builtins.ErrInvalidArgCount {
+		t.Errorf("Expected error %v, got %v", builtins.ErrInvalidArgCount, err)
 	}
 }
 
