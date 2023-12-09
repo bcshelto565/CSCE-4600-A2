@@ -18,13 +18,13 @@ var (
 func TestPrintFileContents(t *testing.T) {
 	// tmp := t.TempDir()
 	var out bytes.Buffer
-	tmpfile, temperr := ioutil.TempFile("", "example")
+	tmpfile, temperr := io.TempFile("", "example")
 	if temperr != nil {
 		t.Fatalf("tempfile not opened, error = %v", temperr)
 	}
 	tempstring := "example"
 	filNam := tmpfile.Name()
-	tmpfile2, temperr2 := ioutil.TempFile("", "example2")
+	tmpfile2, temperr2 := io.TempFile("", "example2")
 	if temperr2 != nil {
 		t.Fatalf("tempfile not opened, error = %v", temperr)
 	}
