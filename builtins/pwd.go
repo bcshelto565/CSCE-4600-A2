@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"io"
+	"strings"
 )
 
 var (
@@ -14,20 +15,20 @@ var (
 func PrintCurrentDir(w io.Writer, args ...string) error {
 	switch len(args) {
 	case 0: // print current working directory
-		pwd := string(os.Getwd())
+		pwd, _ := string(os.Getwd())
 		output := make([]string, 0)
 		output = append(output, pwd)
 		_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
 		return err
 	case 1:
 		if (args[0] == "-L") {
-			pwd := string(os.Getwd())
+			pwd, _ := string(os.Getwd())
 			output := make([]string, 0)
 			output = append(output, pwd)
 			_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
 			return err
 		} else if (args[0] == "-P") {
-			pwd := string(os.Getwd())
+			pwd, _ := string(os.Getwd())
 			output := make([]string, 0)
 			output = append(output, pwd)
 			_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
