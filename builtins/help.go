@@ -40,9 +40,7 @@ func Help(w io.Writer, args ...string) error {
 		helpList := make([]string, 0)
 		// justargs := strings.Join(args,"")
 		
-		for _, s := range HelpList {
-			helpList = append(helpList, s)
-		}
+		helpList = append(helpList, HelpList...)
 		_, err2 := fmt.Fprintln(w, strings.Join(helpList, "\n"))
 		return err2
 		// return fmt.Errorf("%w", NonError)
