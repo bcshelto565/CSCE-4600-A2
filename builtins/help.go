@@ -10,6 +10,7 @@ import (
 
 var (
 	ErrInvalidArgCountHelp = errors.New("invalid argument count: expected no arguments for help. help prints out available builtin commands")
+	ErrMissingBuiltins = errors.New("cannot find builtins directory, cannot list builtins")
 )
 
 var HelpList []string
@@ -20,7 +21,7 @@ func Help(w io.Writer, args ...string) error {
 		dir, err := os.Open("./builtins")
 		if err != nil {
 			fmt.Println("Error:", err)
-			return fmt.Errorf("%w: Directory failed to open", EmptyFileError)
+			return fmt.Errorf("%w: Directory failed to open", ErrMissingBuiltins)
 		}
 		defer dir.Close()
 		files, err := dir.Readdir(-1)
