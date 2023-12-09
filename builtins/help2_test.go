@@ -52,7 +52,13 @@ func TestHelp(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-
+			/*if tt.missinB {
+				oldVal := builtins.HomeDir
+				t.Cleanup(func() {
+					builtins.HomeDir = oldVal
+				})
+				builtins.HomeDir = ""
+			}*/
 			// testing
 			if err := builtins.Help(&out, tt.args.args...); tt.wantErr != nil {
 				if !errors.Is(err, tt.wantErr) {
