@@ -9,7 +9,6 @@ import (
 
 var (
 	ErrInvalidArgCountEcho = errors.New("invalid argument count")
-	// PlaceholderErr = errors.New("")
 )
 
 func Echo(w io.Writer, args ...string) (error) {
@@ -20,7 +19,6 @@ func Echo(w io.Writer, args ...string) (error) {
 		ech := make([]string, 0)
 		justargs := strings.Join(args,"")
 		ech = append(ech, justargs)
-		// PlaceholderErr = errors.New(ech)
 		_, err := fmt.Fprintln(w, strings.Join(ech, "\n"))
 		return err
 	}
