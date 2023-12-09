@@ -45,14 +45,14 @@ func TestPrintFileContents(t *testing.T) {
 			args: args{
 				args: []string{"abc", "def"},
 			},
-			wantErr: builtins.ErrInvalidArgCountCat,
+			wantErr: builtins.ErrInvalidArgCount,
 		},
 		{
 			name:    "no args should throw invalid args error",
       			args: args{
 				args: []string{},
 			},
-			wantErr: builtins.ErrInvalidArgCountCat,
+			wantErr: builtins.ErrInvalidArgCount,
 		},
 		{
 			name:         "no file contents should throw empty file error",
