@@ -8,12 +8,6 @@ import (
 	"fmt"
 )
 
-
-var (
-	/*ErrInvalidArgCountCat = errors.New("invalid argument count")
-	EmptyFileError = errors.New("invalid file")*/
-)
-
 func TestEcho(t *testing.T) {
   var out bytes.Buffer
 	type args struct {
@@ -51,14 +45,6 @@ func TestEcho(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// setup
-			/*if tt.unsetHomedir {
-				oldVal := builtins.HomeDir
-				t.Cleanup(func() {
-					builtins.HomeDir = oldVal
-				})
-				builtins.HomeDir = ""
-			}*/
-
 			// testing
 			if err := builtins.Echo(&out, tt.args.args...); tt.wantErr != nil {
 				if !errors.Is(err, tt.wantErr) {
@@ -68,25 +54,6 @@ func TestEcho(t *testing.T) {
 			} else if err != nil {
 				t.Fatalf("Echo() unexpected error: %v", err)
 			}
-
-			// "happy" path
-      /*
-			file, err := os.Open(filNam)
-			if err != nil {
-				t.Fatalf("Could not open temp file")
-			}
-			file.Close()*/
-			/*d1, err := os.Stat(wd)
-			if err != nil {
-				t.Fatalf("Could not stat dir: %v", wd)
-			}
-			d2, err := os.Stat(tt.wantDir)
-			if err != nil {
-				t.Fatalf("Could not stat dir: %v", tt.wantDir)
-			}
-			if !os.SameFile(d1, d2) {
-				t.Errorf("Working Directory = %v, wantDir %v", wd, tt.wantDir)
-			}*/
 		})
 	}
 }
