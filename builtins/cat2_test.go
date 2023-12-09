@@ -9,14 +9,7 @@ import (
 	// "io"
 )
 
-
-var (
-	/*ErrInvalidArgCountCat = errors.New("invalid argument count")
-	EmptyFileError = errors.New("invalid file")*/
-)
-
 func TestPrintFileContents(t *testing.T) {
-	// tmp := t.TempDir()
 	var out bytes.Buffer
 	tmpfile, temperr := os.CreateTemp("", "example")
 	if temperr != nil {
@@ -39,7 +32,6 @@ func TestPrintFileContents(t *testing.T) {
 	tests := []struct {
 		name         string
 		args         args
-		// unsetHomedir bool
 		wantFile     string
 		wantErr      error
 	}{
@@ -75,14 +67,6 @@ func TestPrintFileContents(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// setup
-			/*if tt.unsetHomedir {
-				oldVal := builtins.HomeDir
-				t.Cleanup(func() {
-					builtins.HomeDir = oldVal
-				})
-				builtins.HomeDir = ""
-			}*/
-
 			// testing
 			if err := builtins.PrintFileContents(&out, tt.args.args...); tt.wantErr != nil {
 				if !errors.Is(err, tt.wantErr) {
@@ -99,17 +83,6 @@ func TestPrintFileContents(t *testing.T) {
 				t.Fatalf("Could not open temp file")
 			}
 			file.Close()
-			/*d1, err := os.Stat(wd)
-			if err != nil {
-				t.Fatalf("Could not stat dir: %v", wd)
-			}
-			d2, err := os.Stat(tt.wantDir)
-			if err != nil {
-				t.Fatalf("Could not stat dir: %v", tt.wantDir)
-			}
-			if !os.SameFile(d1, d2) {
-				t.Errorf("Working Directory = %v, wantDir %v", wd, tt.wantDir)
-			}*/
 		})
 	}
 }
