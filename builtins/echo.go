@@ -8,7 +8,7 @@ import (
 
 var (
 	ErrInvalidArgCountEcho = errors.New("invalid argument count")
-	PlaceholderErr = errors.New("")
+	// PlaceholderErr = errors.New("")
 )
 
 func Echo(w io.Writer, args ...string) (error) {
@@ -17,7 +17,7 @@ func Echo(w io.Writer, args ...string) (error) {
 		return fmt.Errorf("%w: expected at least one argument, echo is used to echo a string, need a string to echo", ErrInvalidArgCountEcho)
 	default:
 		ech := fmt.Sprint(args)
-		PlaceholderErr = errors.New(ech)
-		return fmt.Errorf("%w",PlaceholderErr)
+		// PlaceholderErr = errors.New(ech)
+		return fmt.Sprintln(ech)
 	}
 }
