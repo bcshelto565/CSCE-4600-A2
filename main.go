@@ -18,8 +18,6 @@ func main() {
 	runLoop(os.Stdin, os.Stdout, os.Stderr, exit)
 }
 
-var str string
-
 func runLoop(r io.Reader, w, errW io.Writer, exit chan struct{}) {
 	var (
 		input    string
