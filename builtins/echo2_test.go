@@ -27,11 +27,11 @@ func TestEcho(t *testing.T) {
 		wantOut      string
 	}{
 		{
-			name: "error too many args",
+			name: "spaced out args",
 			args: args{
 				args: []string{"abc ", "def "},
 			},
-			wantErr: builtins.ErrInvalidArgCountEcho,
+			wantOut: fmt.Sprintln("abc def "),
 		},
 		{
 			name: "no args should throw invalid args error",
