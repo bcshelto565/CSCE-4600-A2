@@ -43,7 +43,7 @@ func TestHelp(t *testing.T) {
 		},
 		{
 			  name: "builtins not found should throw missing dir error",
-			  missinB:true
+			  missinB: true,
         args: args{
 				  args: []string{},
 			},
