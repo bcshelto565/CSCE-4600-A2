@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>builtins: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/bcshelto565/CSCE-4600-A2/builtins/alias.go (87.0%)</option>
+				
+				<option value="file1">github.com/bcshelto565/CSCE-4600-A2/builtins/cat.go (85.7%)</option>
+				
+				<option value="file2">github.com/bcshelto565/CSCE-4600-A2/builtins/cd.go (0.0%)</option>
+				
+				<option value="file3">github.com/bcshelto565/CSCE-4600-A2/builtins/echo.go (100.0%)</option>
+				
+				<option value="file4">github.com/bcshelto565/CSCE-4600-A2/builtins/env.go (100.0%)</option>
+				
+				<option value="file5">github.com/bcshelto565/CSCE-4600-A2/builtins/help.go (36.4%)</option>
+				
+				<option value="file6">github.com/bcshelto565/CSCE-4600-A2/builtins/pwd.go (95.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package builtins
+
+import (
+        "errors"
+        "fmt"
+        "io"
+        "strings"
+)
+
+var (
+        ErrInvalidArgCountAlias = errors.New("invalid argument count: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.")
+        NonError = errors.New("")
+)
+
+type ComAlias struct {                        // struct for new custom alias entries
+        name string
+        value string
+}
+
+var aliasSlic []ComAlias                // slice for holding all the custom alias entries
+
+func printComs(aliasSlic []ComAlias) string <span class="cov8" title="1">{                // simple for loop function to print entries
+        var output string
+        for _, ComAlias := range aliasSlic </span><span class="cov0" title="0">{
+                nam := ComAlias.name
+                val := ComAlias.value
+                output += "Alias name: " + nam + ", Alias value: " + val + "\n"
+        }</span>
+        <span class="cov8" title="1">return output</span>
+}
+
+func CommandAlias(w io.Writer, args ...string) (error) <span class="cov8" title="1">{
+        // var output string
+        switch len(args) </span>{                // switch case for determining how to run the command
+        case 0:<span class="cov8" title="1">
+                return fmt.Errorf("%w", ErrInvalidArgCountAlias)</span>
+        case 1:<span class="cov8" title="1">
+                if args[0] == "-p" </span><span class="cov8" title="1">{
+                        output := make([]string, 0)
+                        output = append(output, string(printComs(aliasSlic)))
+                        _, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+                        return err
+                }</span> else<span class="cov8" title="1"> {
+                        return fmt.Errorf("%w", ErrInvalidArgCountAlias)
+                }</span>
+        case 2:<span class="cov8" title="1">
+                return fmt.Errorf("%w", ErrInvalidArgCountAlias)</span>
+        case 3:<span class="cov8" title="1">
+                aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
+                arg1 := args[0]
+                arg2 := args[2]
+                var output string
+                output = "new alias is: " + arg1 + " = " + arg2 + "\n"
+                _, err := fmt.Fprintln(w, output)
+                return err</span>
+        default:<span class="cov8" title="1">
+                return fmt.Errorf("%w: Expected 1 or 3 arguments, 1 argument of \"-p\" to print alias list, and 3 arguments for an alias entry.", ErrInvalidArgCountAlias)</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package builtins
+
+import (
+        "errors"
+        "fmt"
+        "os"
+        "io"
+        "github.com/jh125486/CSCE4600/Project2/builtins"
+)
+
+var (
+        EmptyFileError = errors.New("invalid file")
+)
+
+func PrintFileContents(w io.Writer, args ...string) error <span class="cov8" title="1">{
+        switch len(args) </span>{                // switch case for determining how to run the command
+        case 0:<span class="cov8" title="1">
+                return fmt.Errorf("%v", builtins.ErrInvalidArgCount)</span>
+        case 1:<span class="cov8" title="1">
+                fil, err := os.ReadFile(args[0])
+                if err != (nil) </span><span class="cov0" title="0">{
+                        return fmt.Errorf("%w: File is empty and cannot be read", EmptyFileError)
+                }</span>
+                <span class="cov8" title="1">file_stat, staterr := os.Stat(args[0])
+                file_size := file_stat.Size()
+                if staterr != (nil) </span><span class="cov0" title="0">{
+                        return fmt.Errorf("%w: File is empty and cannot be read", EmptyFileError)
+                }</span>
+                <span class="cov8" title="1">if file_size == 0 </span><span class="cov8" title="1">{
+                        return fmt.Errorf("%w: File is empty and cannot be read", EmptyFileError)
+                }</span>
+                <span class="cov8" title="1">fmt.Print(string(fil))
+                return (nil)</span>
+        default:<span class="cov8" title="1">
+                return fmt.Errorf("%w", builtins.ErrInvalidArgCount)</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package builtins
+
+import (
+        "errors"
+        "fmt"
+        "os"
+        "github.com/jh125486/CSCE4600/Project2/builtins"
+)
+
+var (
+        ErrInvalidArgCountCd = errors.New("invalid argument count")
+        HomeDir, _         = os.UserHomeDir()
+)
+
+func ChangeDirectory(args ...string) error <span class="cov0" title="0">{
+        switch len(args) </span>{
+        case 0:<span class="cov0" title="0"> // change to home directory if available
+                if HomeDir == "" </span><span class="cov0" title="0">{
+                        return fmt.Errorf("%w: no homedir found, expected one argument (directory)", builtins.ErrInvalidArgCount)
+                }</span>
+                <span class="cov0" title="0">return os.Chdir(HomeDir)</span>
+        case 1:<span class="cov0" title="0">
+                return os.Chdir(args[0])</span>
+        default:<span class="cov0" title="0">
+                return fmt.Errorf("%w: expected zero or one arguments (directory)", builtins.ErrInvalidArgCount)</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package builtins
+
+import (
+        "errors"
+        "fmt"
+        "io"
+        "strings"
+)
+
+var (
+        ErrInvalidArgCountEcho = errors.New("invalid argument count")
+)
+
+func Echo(w io.Writer, args ...string) (error) <span class="cov8" title="1">{
+        switch len(args) </span>{                // switch case for determining how to run the command
+        case 0:<span class="cov8" title="1">
+                return fmt.Errorf("%w: expected at least one argument, echo is used to echo a string, need a string to echo", ErrInvalidArgCountEcho)</span>
+        default:<span class="cov8" title="1">
+                ech := make([]string, 0)
+                justargs := strings.Join(args,"")
+                ech = append(ech, justargs)
+                _, err := fmt.Fprintln(w, strings.Join(ech, "\n"))
+                return err</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package builtins
+
+import (
+        "fmt"
+        "io"
+        "os"
+        "strings"
+        "errors"
+)
+
+var (
+        ErrInvalidArgCount = errors.New("invalid argument count")
+)
+
+func EnvironmentVariables(w io.Writer, args ...string) error <span class="cov8" title="1">{
+        toRemove := make([]string, 0)
+        for i := 0; i &lt; len(args); i++ </span><span class="cov8" title="1">{
+                if args[i] == "-u" </span><span class="cov8" title="1">{
+                        if len(args) &lt; i+2 </span><span class="cov8" title="1">{
+                                return fmt.Errorf("%w: -u requires an argument", ErrInvalidArgCount)
+                        }</span>
+                        <span class="cov8" title="1">toRemove = append(toRemove, args[i+1])
+                        i++</span>
+                }
+        }
+
+        <span class="cov8" title="1">toShow := make([]string, 0)
+        for _, env := range os.Environ() </span><span class="cov8" title="1">{
+                show := true
+                for _, v := range toRemove </span><span class="cov8" title="1">{
+                        if strings.HasPrefix(env, v+"=") </span><span class="cov8" title="1">{
+                                show = false
+                                break</span>
+                        }
+                }
+                <span class="cov8" title="1">if show </span><span class="cov8" title="1">{
+                        toShow = append(toShow, env)
+                }</span>
+        }
+
+        <span class="cov8" title="1">_, err := fmt.Fprintln(w, strings.Join(toShow, "\n"))
+
+        return err</span>
+}
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package builtins
+
+import (
+        "errors"
+        "fmt"
+        "os"
+        "strings"
+        "io"
+)
+
+var (
+        ErrInvalidArgCountHelp = errors.New("invalid argument count: expected no arguments for help. help prints out available builtin commands")
+        ErrMissingBuiltins = errors.New("cannot find builtins directory, cannot list builtins")
+)
+
+var HelpList []string
+
+func Help(w io.Writer, args ...string) error <span class="cov8" title="1">{
+        switch len(args) </span>{                // switch case for determining how to run the command
+        case 0:<span class="cov8" title="1">
+                dir, err := os.Open("./builtins")
+                if err != nil </span><span class="cov8" title="1">{
+                        fmt.Println("Error:", err)
+                        return fmt.Errorf("%w: Directory failed to open", ErrMissingBuiltins)
+                }</span>
+                <span class="cov0" title="0">defer dir.Close()
+                files, err := dir.Readdir(-1)
+                if err != nil </span><span class="cov0" title="0">{
+                        fmt.Println("Error:", err)
+                        return fmt.Errorf("%w: Directory failed to open", EmptyFileError)
+                }</span>
+                <span class="cov0" title="0">for _, file := range files </span><span class="cov0" title="0">{
+                        if strings.Contains((file.Name()), "test")</span><span class="cov0" title="0">{
+                                continue</span>
+                        } else<span class="cov0" title="0"> {
+                                fileNam := ((file.Name())[:len(file.Name())-3])
+                                HelpList = append(HelpList, fileNam)
+                        }</span>
+                }
+                <span class="cov0" title="0">helpList := make([]string, 0)
+                helpList = append(helpList, HelpList...)
+                _, err2 := fmt.Fprintln(w, strings.Join(helpList, "\n"))
+                return err2</span>
+        case 1:<span class="cov8" title="1">
+                return fmt.Errorf("%w", ErrInvalidArgCountHelp)</span>
+        case 2:<span class="cov8" title="1">
+                return fmt.Errorf("%w", ErrInvalidArgCountHelp)</span>
+        default:<span class="cov8" title="1">
+                return fmt.Errorf("%w", ErrInvalidArgCountHelp)</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package builtins
+
+import (
+        "errors"
+        "fmt"
+        "os"
+        "io"
+        "strings"
+)
+
+var (
+        ErrInvalidArgCountPwd = errors.New("invalid argument count")
+)
+
+func PrintCurrentDir(w io.Writer, args ...string) error <span class="cov8" title="1">{
+        switch len(args) </span>{
+        case 0:<span class="cov8" title="1"> // print current working directory
+                pwd, _ := os.Getwd()
+                output := make([]string, 0)
+                output = append(output, pwd)
+                _, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+                return err</span>
+        case 1:<span class="cov8" title="1">
+                if (args[0] == "-L") </span><span class="cov8" title="1">{
+                        pwd, _ := os.Getwd()
+                        output := make([]string, 0)
+                        output = append(output, pwd)
+                        _, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+                        return err
+                }</span> else<span class="cov8" title="1"> if (args[0] == "-P") </span><span class="cov8" title="1">{
+                        pwd, _ := os.Getwd()
+                        output := make([]string, 0)
+                        output = append(output, pwd)
+                        _, err := fmt.Fprintln(w, strings.Join(output, "\n"))
+                        return err
+                }</span> else<span class="cov8" title="1"> {
+                        return fmt.Errorf("%w: expected zero or one arguments -L for logical working directory address and -P for physical working directory address", ErrInvalidArgCount)
+                }</span>
+        default:<span class="cov0" title="0">
+                return fmt.Errorf("%w", ErrInvalidArgCount)</span>
+        }
+}
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
