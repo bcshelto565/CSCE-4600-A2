@@ -34,9 +34,9 @@ func PrintCurrentDir(w io.Writer, args ...string) error {
 			_, err := fmt.Fprintln(w, strings.Join(output, "\n"))
 			return err
 		} else {
-			return fmt.Errorf("%w: expected zero or one arguments -L for logical working directory address and -P for physical working directory address", ErrInvalidArgCountPwd)
+			return fmt.Errorf("%w: expected zero or one arguments -L for logical working directory address and -P for physical working directory address", ErrInvalidArgCount)
 		}
 	default:
-		return fmt.Errorf("%w: expected zero or one arguments (directory)", ErrInvalidArgCountPwd)
+		return fmt.Errorf("%w", ErrInvalidArgCount)
 	}
 }

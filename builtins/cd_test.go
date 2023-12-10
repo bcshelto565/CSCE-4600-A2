@@ -23,7 +23,7 @@ func TestChangeDirectory(t *testing.T) {
 		{
 			name: "error too many args",
 			args: args{
-				args: []string{"abc", "def"},
+				args: []string{"abc ", "def "},
 			},
 			wantErr: builtins.ErrInvalidArgCount,
 		},

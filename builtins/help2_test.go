@@ -5,8 +5,10 @@ import (
 	"errors"
 	"github.com/bcshelto565/CSCE-4600-A2/builtins"
 	"testing"
-	// "fmt"
+	"fmt"
 )
+
+var list string
 
 func TestHelp(t *testing.T) {
   var out bytes.Buffer
@@ -20,20 +22,43 @@ func TestHelp(t *testing.T) {
 		wantFile     string
 		wantErr      error
 		wantOut      string
+		list	string
 	}{
 		{
-			name: "args passed should throw error",
+			name: "3 args passed should throw error",
+			args: args{
+				args: []string{"abc ", "def ", "ghi "},
+			},
+			wantErr: builtins.ErrInvalidArgCountHelp,
+		},
+		{
+			name: "2 args passed should throw error",
 			args: args{
 				args: []string{"abc ", "def "},
 			},
 			wantErr: builtins.ErrInvalidArgCountHelp,
 		},
 		{
-			name: "no args should print helpList",
+			name: "1 arg passed should throw error",
+			args: args{
+				args: []string{"abc "},
+			},
+			wantErr: builtins.ErrInvalidArgCountHelp,
+		},
+		{
+			name: "no args should print helpList with no errors",
         		args: args{
 				args: []string{},
 			},
 			wantErr: nil,
+		},
+		{
+			name: "no args should print helpList",
+        		args: args{
+				args: []string{},
+			},
+			list: ("alias\ncat\ncd\necho\nenv\nhelp\npwd\n"),
+			wantOut: fmt.Sprintln(list),
 		},
 	}
 	for _, tt := range tests {

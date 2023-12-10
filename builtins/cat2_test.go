@@ -6,7 +6,6 @@ import (
 	"github.com/bcshelto565/CSCE-4600-A2/builtins"
 	"os"
 	"testing"
-	// "io"
 )
 
 func TestPrintFileContents(t *testing.T) {

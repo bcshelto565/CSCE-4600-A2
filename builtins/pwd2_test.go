@@ -42,6 +42,13 @@ func TestPrintCurrentDir(t *testing.T) {
 			},
 			wantErr: nil,
 		},
+		{
+			name: "args passed unexpected should throw error",
+			args: args{
+				args: []string{"-Z"},
+			},
+			wantErr: builtins.ErrInvalidArgCount,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -29,6 +29,13 @@ func TestCommandAlias(t *testing.T) {
 			wantErr: builtins.ErrInvalidArgCountAlias,
 		},
 		{
+			name: "wrong amount of args",
+			args: args{
+				args: []string{"abc ", "def "},
+			},
+			wantErr: builtins.ErrInvalidArgCountAlias,
+		},
+		{
 			name:    "no args should throw invalid args error",
       			args: args{
 				args: []string{},
@@ -41,6 +48,13 @@ func TestCommandAlias(t *testing.T) {
 				args: []string{"-p"},
 			},
 			wantOut: fmt.Sprintln(""),
+		},
+		{
+			name:         "no valid args should throw error",
+			args: args{
+				args: []string{"-Z"},
+			},
+			wantErr: builtins.ErrInvalidArgCountAlias,
 		},
 		{
 			name: "valid arguments should add to list",

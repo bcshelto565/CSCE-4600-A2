@@ -44,7 +44,7 @@ func CommandAlias(w io.Writer, args ...string) (error) {
 			return fmt.Errorf("%w", ErrInvalidArgCountAlias)
 		}
 	case 2:
-		return fmt.Errorf("%w: missing arguments, alias needs to be used in the following syntax: alias update = \"sudo apt-get update\" ensure the \"\" quotes are used to define the command", ErrInvalidArgCountAlias)
+		return fmt.Errorf("%w", ErrInvalidArgCountAlias)
 	case 3:
 		aliasSlic = append(aliasSlic, (ComAlias{name: args[0], value: args[2]}))
 		arg1 := args[0]
