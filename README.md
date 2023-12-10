@@ -13,7 +13,12 @@ Two shell builtins were already written:
 
 ## Builtins
 
-I wrote the alias, cat, echo, help, and pwd functions.
+I wrote the functions and test cases for these commands:
+- `alias`
+- `cat`
+- `echo`
+- `help`
+- `pwd` 
 
 The test coverage hits exactly 76% as required by the assignment. this is shown in the coverage.html report. I got this report by running 
 - go test -coverprofile=coverage.out
